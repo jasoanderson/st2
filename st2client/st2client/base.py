@@ -170,7 +170,9 @@ class BaseCLIApp(object):
     def _parse_config_file(self, args):
         config_file_path = self._get_config_file_path(args=args)
 
-        parser = CLIConfigParser(config_file_path=config_file_path, validate_config_exists=False)
+        parser = CLIConfigParser(config_file_path=config_file_path,
+                                 validate_config_exists=False,
+                                 log=self.LOG)
         result = parser.parse()
         return result
 

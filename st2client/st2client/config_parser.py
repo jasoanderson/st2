@@ -121,13 +121,16 @@ for section, keys in six.iteritems(CONFIG_FILE_OPTIONS):
 
 
 class CLIConfigParser(object):
-    LOG = logging.getLogger(__name__)  # logger instance to use
-
-    def __init__(self, config_file_path, validate_config_exists=True):
+    def __init__(self, config_file_path, validate_config_exists=True, log=None):
         if validate_config_exists and not os.path.isfile(config_file_path):
             raise ValueError('Config file "%s" doesn\'t exist')
 
+        if log is None:
+            log = logging.getLogger(__name__)
+            logging.basicConfig()
+
         self.config_file_path = config_file_path
+        self.LOG = log
 
     def parse(self):
         """
